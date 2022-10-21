@@ -1,0 +1,22 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+
+}
+
+.dialogsitems {
+    padding: 10px;
+    color: aliceblue;
+
+}
+.dialogsitems .active {
+    color: darkorange;
+}
+
+.messages {
+    padding: 10px;
+}
+
+.messages .message {
+    color: aliceblue;
+}
