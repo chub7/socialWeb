@@ -2,25 +2,27 @@ import React, {ChangeEvent} from 'react';
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionTypes,  dialogsPageType} from "../../redux/state";
-import {changeNewMessageBodyAc, sendNewMessageAc} from "../../redux/dialogsReducer";
+import { dialogsPageType} from "../../redux/state";
 
-type DialogsType = dialogsPageType & {
-    dispatch: (action: ActionTypes) => void
+
+type DialogsType = {
+    dialogsPageData: dialogsPageType
+    onChangetextAreaHadnler:(newText:string)=>void
+    onButtonClickHandler:()=>void
+
 }
 
 export const Dialogs = (props: DialogsType) => {
-    const textareaRef = React.createRef <HTMLTextAreaElement>()
 
-    let messagesElemets = props.messageData.map(e => <Message key={e.id} message={e.message} id={e.id}/>)
-    let dialogsElemets = props.dialogsData.map(e => <DialogItem key={e.id} name={e.name} id={e.id}/>)
+    let messagesElemets = props.dialogsPageData.messageData.map(e => <Message key={e.id} message={e.message} id={e.id}/>)
+    let dialogsElemets = props.dialogsPageData.dialogsData.map(e => <DialogItem key={e.id} name={e.name} id={e.id}/>)
 
     const onChangetextAreaHadnler = (e:ChangeEvent<HTMLTextAreaElement>) => {
         let newText = e.currentTarget.value
-        props.dispatch(changeNewMessageBodyAc(newText))
+        props.onChangetextAreaHadnler(newText)
     }
     const onButtonClickHandler = () => {
-        props.dispatch(sendNewMessageAc(props.newMessageBody))
+        props.onButtonClickHandler()
     }
 
     return (
@@ -32,7 +34,7 @@ export const Dialogs = (props: DialogsType) => {
                 <div className={s.messages}>
                     {messagesElemets}
                 </div>
-                <textarea value={props.newMessageBody} onChange={onChangetextAreaHadnler} ref={textareaRef}></textarea>
+                <textarea value={props.dialogsPageData.newMessageBody} onChange={onChangetextAreaHadnler} ></textarea>
                 <button onClick={onButtonClickHandler}>Add post</button>
             </div>
 

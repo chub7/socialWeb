@@ -2,9 +2,11 @@ import React from "react";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {ActionTypes, profilePageType} from "../../redux/state";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {RootStoreType} from "../../redux/redux-store";
 
-type profilePageTypeSpecial = profilePageType & {
-    dispatch: (action: ActionTypes) => void
+type profilePageTypeSpecial = {
+    store: RootStoreType
 }
 
 
@@ -12,10 +14,7 @@ export const Profile = (props: profilePageTypeSpecial) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postsData={props.postsData}
-                     message={props.message}
-                     dispatch={props.dispatch}
-            />
+            <MyPostsContainer store={props.store} />
 
         </div>
     )

@@ -6,7 +6,27 @@ import {ActionTypes, dialogsPageType} from "./state";
 const CHANGHE_NEW_MESSAGE_BODY = 'CHANGHE_NEW_MESSAGE_BODY'
 const SEND_MESSAGE = 'SEND_MESSAGE'
 
-export const dialogsReducer = (state:dialogsPageType, action:ActionTypes) => {
+let dialogsPageIntialState = {
+    dialogsData: [
+        {id: v1(), name: "Dima"},
+        {id: v1(), name: "July"},
+        {id: v1(), name: "Valera"},
+        {id: v1(), name: "Katya"},
+        {id: v1(), name: "Sasha"},
+        {id: v1(), name: "Maks"}
+    ],
+    messageData: [
+        {id: v1(), message: "Hi"},
+        {id: v1(), message: "Nice to see you"},
+        {id: v1(), message: "Salam"},
+        {id: v1(), message: "Zdarova"},
+        {id: v1(), message: "rush B"},
+        {id: v1(), message: "nigga"}
+    ],
+    newMessageBody: ""
+}
+
+export const dialogsReducer = (state:dialogsPageType = dialogsPageIntialState, action:ActionTypes) => {
     switch (action.type){
         case CHANGHE_NEW_MESSAGE_BODY:
             state.newMessageBody = action.newText

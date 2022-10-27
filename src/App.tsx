@@ -6,10 +6,12 @@ import {Profile} from "./componets/Profile/Profile";
 import {Dialogs} from "./componets/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./componets/News/News";
-import {StoreType} from "./redux/state";
+import {RootStoreType} from "./redux/redux-store";
+import {DialogsContainer} from "./componets/Dialogs/DialogsContainer";
+
 
 type AppType = {
-    store: StoreType
+    store: RootStoreType
     message: string
 
 }
@@ -24,18 +26,11 @@ const App: React.FC<AppType> = (props) => {
                 <div className="app-wrapper-content">
 
                     <Route exact path={`/dialogs`} render={() =>
-                        <Dialogs messageData={state.dialogsPage.messageData}
-                                 dialogsData={state.dialogsPage.dialogsData}
-                                 newMessageBody={state.dialogsPage.newMessageBody}
-                                 dispatch={props.store.dispatch.bind(props.store)}
-                        />
+                        <DialogsContainer store={props.store} />
                     }/>
 
                     <Route exact path={`/profile`} render={() =>
-                        <Profile postsData={state.profilePage.postsData}
-                                 message={state.profilePage.message}
-                                 dispatch={props.store.dispatch.bind(props.store)}
-                        />
+                       <Profile store={props.store}/>
                     }/>
 
                     <Route exact path={`/news`} component={News}/>
