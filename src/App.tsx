@@ -5,17 +5,18 @@ import {NavBar} from "./componets/NavBar/Nav";
 import {Profile} from "./componets/Profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./componets/News/News";
-import {RootStoreType} from "./redux/redux-store";
+//import {RootStoreType} from "./redux/redux-store";
 import {DialogsContainer} from "./componets/Dialogs/DialogsContainer";
 
 
 type AppType = {
-    store: RootStoreType
-    message: string
+    //store: RootStoreType
+    //message: string
 
 }
+// const App: React.FC<AppType> = (props) => {
 
-const App: React.FC<AppType> = (props) => {
+const App = () => {
         return (
         <BrowserRouter>
             <div className="app-wrapper">

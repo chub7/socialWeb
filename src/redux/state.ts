@@ -1,28 +1,29 @@
 import {v1} from "uuid";
 import {addPostAc, changeNewTextAc, profileReducer} from "./profileReducer";
 import {changeNewMessageBodyAc, dialogsReducer, sendNewMessageAc} from "./dialogsReducer";
+
 // bellow перенесено в profileReducer
-export type postsDataType = {
+type postsDataType = {
     id: string
     message: string
     likesCount: number
 }
-export type profilePageType = {
+type profilePageType = {
     postsData: Array<postsDataType>
     message: string
 }
 // above перенесено в profileReducer
 
 // bellow перенесено в dialogsReducer
-export type dialogsDataType = {
+type dialogsDataType = {
     id: string
     name: string
 }
-export type messageDataType = {
+type messageDataType = {
     id: string
     message: string
 }
-export type dialogsPageType = {
+type dialogsPageType = {
     dialogsData: Array<dialogsDataType>
     messageData: Array<messageDataType>
     newMessageBody: string

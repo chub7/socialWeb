@@ -30,35 +30,33 @@ let dialogsPageIntialState = {
         {id: v1(), message: "Zdarova"},
         {id: v1(), message: "rush B"},
         {id: v1(), message: "nigga"}
-    ] as Array<messageDataType> ,
+    ] as Array<messageDataType>,
     newMessageBody: "" as string
 }
 
 export type dialogsPageInitialStateType = typeof dialogsPageIntialState
 
-export const dialogsReducer = (state:dialogsPageInitialStateType = dialogsPageIntialState, action:ActionTypes):dialogsPageInitialStateType => {
-    switch (action.type){
+export const dialogsReducer = (state: dialogsPageInitialStateType = dialogsPageIntialState, action: ActionTypes): dialogsPageInitialStateType => {
+    switch (action.type) {
         case CHANGHE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.newText
-            return state;
+            return {...state, newMessageBody: action.newText};
         case SEND_MESSAGE:
             let body = state.newMessageBody
             state.newMessageBody = ""
-            state.messageData.push({id: v1(), message: body})
-            return state;
+            return {...state, messageData: [...state.messageData, {id: v1(), message: body}]};
         default:
             return state
     }
 
 }
 
-export const changeNewMessageBodyAc = (newText:string) => {
+export const changeNewMessageBodyAc = (newText: string) => {
     return {
         type: CHANGHE_NEW_MESSAGE_BODY,
         newText: newText
     } as const
 }
-export const sendNewMessageAc = (messageText:string) => {
+export const sendNewMessageAc = (messageText: string) => {
     return {
         type: SEND_MESSAGE,
         newText: messageText

@@ -1,6 +1,7 @@
 import React from 'react';
 import s from "./../Dialogs.module.css";
-import {messageDataType} from "../../../redux/state";
+import {messageDataType} from "../../../redux/dialogsReducer";
+
 
 
 export const Message = (props:messageDataType ) => {

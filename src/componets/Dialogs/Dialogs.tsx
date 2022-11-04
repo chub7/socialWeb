@@ -2,11 +2,12 @@ import React, {ChangeEvent} from 'react';
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import { dialogsPageType} from "../../redux/state";
+import {dialogsPageInitialStateType} from "../../redux/dialogsReducer";
+
 
 
 type DialogsType = {
-    dialogsPageData: dialogsPageType
+    dialogsPageData: dialogsPageInitialStateType
     onChangetextAreaHadnler:(newText:string)=>void
     onButtonClickHandler:(newMessageBody: string)=>void
 
