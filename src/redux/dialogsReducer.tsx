@@ -1,10 +1,18 @@
 import React from 'react';
 import {v1} from "uuid";
-import {ActionTypes, dialogsPageType} from "./state";
-
+import {ActionTypes} from "./state";
 
 const CHANGHE_NEW_MESSAGE_BODY = 'CHANGHE_NEW_MESSAGE_BODY'
 const SEND_MESSAGE = 'SEND_MESSAGE'
+
+export type dialogsDataType = {
+    id: string
+    name: string
+}
+export type messageDataType = {
+    id: string
+    message: string
+}
 
 let dialogsPageIntialState = {
     dialogsData: [
@@ -14,7 +22,7 @@ let dialogsPageIntialState = {
         {id: v1(), name: "Katya"},
         {id: v1(), name: "Sasha"},
         {id: v1(), name: "Maks"}
-    ],
+    ] as Array<dialogsDataType>,
     messageData: [
         {id: v1(), message: "Hi"},
         {id: v1(), message: "Nice to see you"},
@@ -22,11 +30,13 @@ let dialogsPageIntialState = {
         {id: v1(), message: "Zdarova"},
         {id: v1(), message: "rush B"},
         {id: v1(), message: "nigga"}
-    ],
-    newMessageBody: ""
+    ] as Array<messageDataType> ,
+    newMessageBody: "" as string
 }
 
-export const dialogsReducer = (state:dialogsPageType = dialogsPageIntialState, action:ActionTypes) => {
+export type dialogsPageInitialStateType = typeof dialogsPageIntialState
+
+export const dialogsReducer = (state:dialogsPageInitialStateType = dialogsPageIntialState, action:ActionTypes):dialogsPageInitialStateType => {
     switch (action.type){
         case CHANGHE_NEW_MESSAGE_BODY:
             state.newMessageBody = action.newText

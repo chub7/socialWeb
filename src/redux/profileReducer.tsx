@@ -1,19 +1,27 @@
 import React from 'react';
 import {v1} from "uuid";
-import {ActionTypes, postsDataType, profilePageType} from "./state";
+import {ActionTypes} from "./state";
 
 const ADD_POST = 'ADD-POST'
 const CHANGHE_NEW_TEXT = 'CHANGE-NEW-TEXT'
 
-let profilePageIntialState : profilePageType = {
-        message: ``,
+export type postsDataType = {
+    id: string
+    message: string
+    likesCount: number
+}
+
+let profilePageIntialState  = {
+        message: `` as string,
         postsData: [
             {id: v1(), message: "Hi, how is your Day?", likesCount: 0},
             {id: v1(), message: "It's my first post", likesCount: 23},
-        ],
+        ] as Array<postsDataType>,
     };
 
-export const profileReducer = (state : profilePageType = profilePageIntialState , action: ActionTypes) => {
+export type profilePageInitialStateType = typeof profilePageIntialState
+
+export const profileReducer = (state : profilePageInitialStateType = profilePageIntialState , action: ActionTypes) : profilePageInitialStateType => {
     switch (action.type){
         case ADD_POST:
             const newPost: postsDataType = {

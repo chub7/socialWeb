@@ -7,8 +7,8 @@ import { postsDataType } from "../../../redux/state";
 
 type profilePageTypeSpecial =  {
     message: string
-    onChangetextAreaHadnler: (newtext: string) => void
-    onButtonClickHandler: ()=>void
+    onChangeTextAreaHandler: (newtext: string) => void
+    onButtonClickHandler: (message: string)=>void
     postsData: Array<postsDataType>
 
 }
@@ -20,11 +20,11 @@ export const MyPosts = (props: profilePageTypeSpecial) => {
             .map(e => <Post key={e.id} id={e.id} message={e.message} likesCount={e.likesCount}/>)
 
     const onButtonClickHandler = () => {
-        props.onButtonClickHandler()
+        props.onButtonClickHandler(props.message)
     }
 
     const onChangetextAreaHadnler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.onChangetextAreaHadnler(e.currentTarget.value)
+        props.onChangeTextAreaHandler(e.currentTarget.value)
     }
 
     return (

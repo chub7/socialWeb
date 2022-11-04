@@ -1,35 +1,36 @@
 import React from "react";
-import {addPostAc, changeNewTextAc} from "../../../redux/profileReducer";
+import {addPostAc, changeNewTextAc, postsDataType} from "../../../redux/profileReducer";
 import {MyPosts} from "./MyPosts";
-import {RootStoreType} from "../../../redux/redux-store";
+import {ReduxRootStoreType} from "../../../redux/redux-store";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
 
-type profilePageTypeSpecial = {
-    store: RootStoreType
+type mapStateToPropsType = {
+    message:string,
+    postsData: Array<postsDataType>
+}
+type mapDispatchToProps = {
+    onButtonClickHandler:(message: string)=>void,
+    onChangeTextAreaHandler:(newtext: string)=>void
 
 }
-
-export const MyPostsContainer = (props: profilePageTypeSpecial) => {
-
-    let message = props.store.getState().profilePage.message
-    let postsData =  props.store.getState().profilePage.postsData
-    const onButtonClickHandler = () => {
-
-        props.store.dispatch(addPostAc(message))
-
+const mapStateToProps = (state: ReduxRootStoreType) : mapStateToPropsType => {
+    return {
+        message: state.profilePage.message,
+        postsData: state.profilePage.postsData
     }
-
-    const onChangetextAreaHadnler = (newtext: string) => {
-
-        props.store.dispatch(changeNewTextAc(newtext))
-    }
-
-    return (<MyPosts message={message}
-                     postsData={postsData}
-                     onChangetextAreaHadnler={onChangetextAreaHadnler}
-                     onButtonClickHandler={onButtonClickHandler}
-        />
-
-
-    )
 }
+
+const mapDispatchToProps = (dispatch: Dispatch) : mapDispatchToProps => {
+    return {
+        onButtonClickHandler: (message: string) => {
+            dispatch(addPostAc(message))
+        },
+        onChangeTextAreaHandler: (newtext: string) => {
+            dispatch(changeNewTextAc(newtext))
+        }
+    }
+}
+
+export const MyPostsContainer = connect(mapStateToProps,mapDispatchToProps)(MyPosts);

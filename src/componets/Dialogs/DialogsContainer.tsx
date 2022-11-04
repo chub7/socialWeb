@@ -1,26 +1,55 @@
 import React from 'react';
-import {changeNewMessageBodyAc, sendNewMessageAc} from "../../redux/dialogsReducer";
-import {RootStoreType} from "../../redux/redux-store";
+import {changeNewMessageBodyAc, dialogsPageInitialStateType, sendNewMessageAc} from "../../redux/dialogsReducer";
+import {ReduxRootStoreType} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
+import {connect} from "react-redux";
+import { Dispatch } from 'redux';
 
-type DialogsType = {
-    store: RootStoreType
+
+// export const DialogsContainer = (props: DialogsType) => {
+//     let dialogsPageData = props.store.getState().dialogsPage
+//
+//     const onChangetextAreaHadnler = (newText: string) => {
+//         props.store.dispatch(changeNewMessageBodyAc(newText))
+//     }
+//     const onButtonClickHandler = () => {
+//         props.store.dispatch(sendNewMessageAc(props.store.getState().dialogsPage.newMessageBody))
+//     }
+//
+//     return (<Dialogs dialogsPageData={dialogsPageData}
+//                      onChangetextAreaHadnler={onChangetextAreaHadnler}
+//                      onButtonClickHandler={onButtonClickHandler}
+//         />
+//
+//     );
+// };
+
+type mapStateToPropsType = {
+    dialogsPageData:dialogsPageInitialStateType
 }
 
-export const DialogsContainer = (props: DialogsType) => {
-    let dialogsPageData = props.store.getState().dialogsPage
+type mapDispatchToPropsType = {
+    onChangetextAreaHadnler:(newText:string)=>void,
+    onButtonClickHandler:(newMessageBody: string)=>void
+}
 
-    const onChangetextAreaHadnler = (newText: string) => {
-        props.store.dispatch(changeNewMessageBodyAc(newText))
+const mapStateToProps =(state:ReduxRootStoreType):mapStateToPropsType=>{
+    return {
+        dialogsPageData: state.dialogsPage
     }
-    const onButtonClickHandler = () => {
-        props.store.dispatch(sendNewMessageAc(props.store.getState().dialogsPage.newMessageBody))
+}
+
+
+const mapDispatchToProps =(dispatch: Dispatch):mapDispatchToPropsType=>{
+    return{
+        onChangetextAreaHadnler: (newText:string)=> {
+            dispatch(changeNewMessageBodyAc(newText))
+        },
+        onButtonClickHandler:(newMessageBody: string)=>{
+            dispatch(sendNewMessageAc(newMessageBody))
+        }
+
     }
+}
 
-    return (<Dialogs dialogsPageData={dialogsPageData}
-                     onChangetextAreaHadnler={onChangetextAreaHadnler}
-                     onButtonClickHandler={onButtonClickHandler}
-        />
-
-    );
-};
+export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);

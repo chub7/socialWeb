@@ -1,8 +1,7 @@
 import {v1} from "uuid";
 import {addPostAc, changeNewTextAc, profileReducer} from "./profileReducer";
 import {changeNewMessageBodyAc, dialogsReducer, sendNewMessageAc} from "./dialogsReducer";
-import {sideBarReducer} from "./sideBarReducer";
-
+// bellow перенесено в profileReducer
 export type postsDataType = {
     id: string
     message: string
@@ -12,6 +11,9 @@ export type profilePageType = {
     postsData: Array<postsDataType>
     message: string
 }
+// above перенесено в profileReducer
+
+// bellow перенесено в dialogsReducer
 export type dialogsDataType = {
     id: string
     name: string
@@ -25,8 +27,8 @@ export type dialogsPageType = {
     messageData: Array<messageDataType>
     newMessageBody: string
 
-
 }
+// above перенесено в dialogsReducer
 
 export type stateType = {
     profilePage: profilePageType

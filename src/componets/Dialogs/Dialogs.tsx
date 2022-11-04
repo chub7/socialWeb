@@ -8,7 +8,7 @@ import { dialogsPageType} from "../../redux/state";
 type DialogsType = {
     dialogsPageData: dialogsPageType
     onChangetextAreaHadnler:(newText:string)=>void
-    onButtonClickHandler:()=>void
+    onButtonClickHandler:(newMessageBody: string)=>void
 
 }
 
@@ -22,7 +22,7 @@ export const Dialogs = (props: DialogsType) => {
         props.onChangetextAreaHadnler(newText)
     }
     const onButtonClickHandler = () => {
-        props.onButtonClickHandler()
+        props.onButtonClickHandler(props.dialogsPageData.newMessageBody)
     }
 
     return (
@@ -41,3 +41,5 @@ export const Dialogs = (props: DialogsType) => {
         </div>
     );
 };
+
+
