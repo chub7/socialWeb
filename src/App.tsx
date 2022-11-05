@@ -4,20 +4,11 @@ import {Header} from "./componets/Header/Header";
 import {NavBar} from "./componets/NavBar/Nav";
 import {Profile} from "./componets/Profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
-import {News} from "./componets/News/News";
-//import {RootStoreType} from "./redux/redux-store";
 import {DialogsContainer} from "./componets/Dialogs/DialogsContainer";
-
-
-type AppType = {
-    //store: RootStoreType
-    //message: string
-
-}
-// const App: React.FC<AppType> = (props) => {
+import {UsersContainer} from "./componets/Users/usersContainer";
 
 const App = () => {
-        return (
+    return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
@@ -25,14 +16,16 @@ const App = () => {
                 <div className="app-wrapper-content">
 
                     <Route exact path={`/dialogs`} render={() =>
-                        <DialogsContainer  />
+                        <DialogsContainer/>
                     }/>
 
                     <Route exact path={`/profile`} render={() =>
-                       <Profile />
+                        <Profile/>
+                    }/>
+                    <Route exact path={`/users`} render={() =>
+                        <UsersContainer/>
                     }/>
 
-                    <Route exact path={`/news`} component={News}/>
                 </div>
             </div>
         </BrowserRouter>

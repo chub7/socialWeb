@@ -1,6 +1,6 @@
 import {v1} from "uuid";
-import {addPostAc, changeNewTextAc, profileReducer} from "./profileReducer";
-import {changeNewMessageBodyAc, dialogsReducer, sendNewMessageAc} from "./dialogsReducer";
+import {addPostAc, changeNewTextAc} from "./profileReducer";
+import {changeNewMessageBodyAc,  sendNewMessageAc} from "./dialogsReducer";
 
 // bellow перенесено в profileReducer
 type postsDataType = {
@@ -31,12 +31,12 @@ type dialogsPageType = {
 }
 // above перенесено в dialogsReducer
 
-export type stateType = {
+type stateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
 
     }
-export type StoreType = {
+type StoreType = {
     _state: stateType
     _onChange: () => void
     subscribe: (callvack: () => void) => void
@@ -44,7 +44,7 @@ export type StoreType = {
     dispatch: (action: ActionTypes) => void
 
 }
-export type ActionTypes = ReturnType<typeof addPostAc> | ReturnType<typeof changeNewTextAc>
+type ActionTypes = ReturnType<typeof addPostAc> | ReturnType<typeof changeNewTextAc>
     | ReturnType<typeof changeNewMessageBodyAc> | ReturnType<typeof sendNewMessageAc>
 
 
@@ -91,8 +91,8 @@ const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage,action)
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage,action)
+        //this._state.profilePage = profileReducer(this._state.profilePage,action)
+       // this._state.dialogsPage = dialogsReducer(this._state.dialogsPage,action)
         //this._state.sidebar = sideBarReducer(this._state.profilePage,action)
         this._onChange()
 

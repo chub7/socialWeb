@@ -1,6 +1,4 @@
-import React from 'react';
 import {v1} from "uuid";
-import {ActionTypes} from "./state";
 
 const CHANGHE_NEW_MESSAGE_BODY = 'CHANGHE_NEW_MESSAGE_BODY'
 const SEND_MESSAGE = 'SEND_MESSAGE'
@@ -41,14 +39,18 @@ export const dialogsReducer = (state: dialogsPageInitialStateType = dialogsPageI
         case CHANGHE_NEW_MESSAGE_BODY:
             return {...state, newMessageBody: action.newText};
         case SEND_MESSAGE:
-            let body = state.newMessageBody
-            state.newMessageBody = ""
-            return {...state, messageData: [...state.messageData, {id: v1(), message: body}]};
+            return {
+                ...state,
+                newMessageBody: '',
+                messageData: [...state.messageData, {id: v1(), message: state.newMessageBody}]
+            };
         default:
             return state
     }
 
 }
+
+type ActionTypes = ReturnType<typeof changeNewMessageBodyAc> | ReturnType<typeof sendNewMessageAc>
 
 export const changeNewMessageBodyAc = (newText: string) => {
     return {
