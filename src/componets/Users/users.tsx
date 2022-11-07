@@ -15,7 +15,7 @@ export const Users = (props: UsersType) => {
         <div>{props.usersPageUsers.map(e => <div key={e.id}>
             <span>
                 <div>
-                    <img className={s.userPhoto} src={e.photoUrl}/>
+                    <img alt={'#'} className={s.userPhoto} src={e.photoUrl}/>
                 </div>
                 <div>
                     {e.followStatus

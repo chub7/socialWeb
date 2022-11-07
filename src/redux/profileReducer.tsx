@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 
 const ADD_POST = 'ADD-POST'
-const CHANGHE_NEW_TEXT = 'CHANGE-NEW-TEXT'
+const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT'
 
 export type postsDataType = {
     id: string
@@ -9,7 +9,7 @@ export type postsDataType = {
     likesCount: number
 }
 
-let profilePageIntialState = {
+let profilePageInitialState = {
     message: `` as string,
     postsData: [
         {id: v1(), message: "Hi, how is your Day?", likesCount: 0},
@@ -17,9 +17,9 @@ let profilePageIntialState = {
     ] as Array<postsDataType>,
 };
 
-export type profilePageInitialStateType = typeof profilePageIntialState
+export type profilePageInitialStateType = typeof profilePageInitialState
 
-export const profileReducer = (state: profilePageInitialStateType = profilePageIntialState, action: ActionTypes): profilePageInitialStateType => {
+export const profileReducer = (state: profilePageInitialStateType = profilePageInitialState, action: ActionTypes): profilePageInitialStateType => {
     switch (action.type) {
         case ADD_POST:
             return {
@@ -28,7 +28,7 @@ export const profileReducer = (state: profilePageInitialStateType = profilePageI
                 postsData:
                     [...state.postsData, {id: v1(), message: action.postText, likesCount: 0}]
             }
-        case CHANGHE_NEW_TEXT:
+        case CHANGE_NEW_TEXT:
             return {...state, message: action.newText};
         default:
             return state;
@@ -45,7 +45,7 @@ export const addPostAc = (postText: string) => {
 }
 export const changeNewTextAc = (newText: string) => {
     return {
-        type: CHANGHE_NEW_TEXT,
+        type: CHANGE_NEW_TEXT,
         newText: newText
     } as const
 }
