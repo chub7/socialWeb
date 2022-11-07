@@ -1,10 +1,8 @@
-import React from "react";
 import {addPostAc, changeNewTextAc, postsDataType} from "../../../redux/profileReducer";
 import {MyPosts} from "./MyPosts";
 import {ReduxRootStoreType} from "../../../redux/redux-store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-
 
 type mapStateToPropsType = {
     message:string,

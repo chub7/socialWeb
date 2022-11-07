@@ -1,4 +1,3 @@
-import {v1} from "uuid";
 
 const FOLLOW = 'FOLLOW'
 const UN_FOLLOW = 'UN_FOLLOW'

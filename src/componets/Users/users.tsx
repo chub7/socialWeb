@@ -4,7 +4,7 @@ import s from "./user.module.css";
 import axios from 'axios';
 import usertPhoro from "../../images/sbcf-default-avatar.png"
 
-type componentUsersType = {
+export type componentUsersType = {
     usersPageUsers: Array<UsersType>,
     follow: (id: number) => void
     unFollow: (id: number) => void
@@ -13,7 +13,7 @@ type componentUsersType = {
 
 export const Users = (props: componentUsersType) => {
         if(props.usersPageUsers.length  === 0 ) {
-            
+
             axios.get(`https://social-network.samuraijs.com/api/1.0/users`)
                 .then(response => {
                 props.setUsers(response.data.items)
