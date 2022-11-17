@@ -1,5 +1,3 @@
-import {log} from "util";
-
 const FOLLOW = 'FOLLOW'
 const UN_FOLLOW = 'UN_FOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -46,12 +44,12 @@ export const usersReducer = (state: usersInitialStateTypeNew = usersInitialState
             console.log(state.items)
             return {
                 ...state,
-                users: state.items.map(e => e.id === action.payload.userId ?  {...e, followed: true} : e)
+                items: state.items.map(e => e.id === action.payload.userId ?  {...e, followed: true} : e)
             }
         case UN_FOLLOW :
             return {
                 ...state,
-                users: state.items.map(e => e.id === action.payload.userId ? {...e, followed: false} : e)
+                items: state.items.map(e => e.id === action.payload.userId ? {...e, followed: false} : e)
             }
         case SET_USERS :
             return {...state, items: action.payload.users}
@@ -67,15 +65,15 @@ export const usersReducer = (state: usersInitialStateTypeNew = usersInitialState
     }
 }
 
-type ActionType = ReturnType<typeof followAC> |
-    ReturnType<typeof unFollowAC> |
-    ReturnType<typeof setUsersAC> |
-    ReturnType<typeof setCurrentPageAC> |
-    ReturnType<typeof setTotalUserCountAC> |
-    ReturnType<typeof toggleFetchingAC>
+type ActionType = ReturnType<typeof follow> |
+    ReturnType<typeof unFollow> |
+    ReturnType<typeof setUsers> |
+    ReturnType<typeof setCurrentPage> |
+    ReturnType<typeof setTotalUserCount> |
+    ReturnType<typeof toggleFetching>
 
 
-export const followAC = (id: number) => {
+export const follow = (id: number) => {
     return {
         type: FOLLOW,
         payload: {
@@ -83,7 +81,7 @@ export const followAC = (id: number) => {
         }
     } as const
 }
-export const unFollowAC = (id: number) => {
+export const unFollow = (id: number) => {
     return {
         type: UN_FOLLOW,
         payload: {
@@ -91,7 +89,7 @@ export const unFollowAC = (id: number) => {
         }
     } as const
 }
-export const setUsersAC = (users: Array<UsersType>) => {
+export const setUsers = (users: Array<UsersType>) => {
     return {
         type: SET_USERS,
         payload: {
@@ -99,7 +97,7 @@ export const setUsersAC = (users: Array<UsersType>) => {
         }
     } as const
 }
-export const setCurrentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: SET_CURRENT_PAGE,
         payload: {
@@ -108,7 +106,7 @@ export const setCurrentPageAC = (currentPage: number) => {
     } as const
 }
 
-export const setTotalUserCountAC = (totalUserCount: number) => {
+export const setTotalUserCount = (totalUserCount: number) => {
     return {
         type: SET_TOTAL_USER_COUNT,
         payload: {
@@ -116,7 +114,7 @@ export const setTotalUserCountAC = (totalUserCount: number) => {
         }
     } as const
 }
-export const toggleFetchingAC = (isFetching: boolean) => {
+export const toggleFetching = (isFetching: boolean) => {
     return {
         type: TOGGLE_IS_FETCHING,
         payload: {

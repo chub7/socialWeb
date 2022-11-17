@@ -1,13 +1,12 @@
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
 import {ReduxRootStoreType} from "../../redux/redux-store";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUserCountAC,
-    setUsersAC,
-    toggleFetchingAC,
-    unFollowAC,
+    follow,
+    setCurrentPage,
+    setTotalUserCount,
+    setUsers,
+    toggleFetching,
+    unFollow,
     UsersType
 } from "./usersReducer";
 import React from "react";
@@ -74,8 +73,6 @@ export type mapDispatchToPropsType = {
     toggleFetching : (isFetching:boolean)=>void
 }
 
-
-
 const mapStateToProps = (state: ReduxRootStoreType): mapStateToPropsType => {
     return {
         usersPageUsers: state.usersPage.items,
@@ -85,29 +82,36 @@ const mapStateToProps = (state: ReduxRootStoreType): mapStateToPropsType => {
         isFetching: state.usersPage.isFetching
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-    return {
-        follow: (id: number) => {
-
-            dispatch(followAC(id))
-        },
-        unFollow: (id: number) => {
-            dispatch(unFollowAC(id))
-        },
-        setUsers: (users: Array<UsersType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage :number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUserCount: (totalUserCount) => {
-            dispatch(setTotalUserCountAC(totalUserCount))
-        },
-        toggleFetching : (isFetching:boolean) => {
-            dispatch(toggleFetchingAC(isFetching))
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+//     return {
+//         follow: (id: number) => {
+//             dispatch(follow(id))
+//         },
+//         unFollow: (id: number) => {
+//             dispatch(unFollow(id))
+//         },
+//         setUsers: (users: Array<UsersType>) => {
+//             dispatch(setUsers(users))
+//         },
+//         setCurrentPage: (currentPage :number) => {
+//             dispatch(setCurrentPage(currentPage))
+//         },
+//         setTotalUserCount: (totalUserCount) => {
+//             dispatch(setTotalUserCount(totalUserCount))
+//         },
+//         toggleFetching: (isFetching: boolean) => {
+//             dispatch(toggleFetching(isFetching))
+//         }
+//     }
+// }
 
 export type CommonType = mapStateToPropsType & mapDispatchToPropsType
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+
+export const UsersContainer = connect(mapStateToProps, {
+    follow,
+    unFollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUserCount,
+    toggleFetching
+})(UsersAPIComponent);
