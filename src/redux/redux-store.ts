@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import {combineReducers, legacy_createStore} from "redux";
 import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
 import {usersReducer} from "../componets/Users/usersReducer";
@@ -10,7 +10,7 @@ let rootReducer = combineReducers({
 })
 
 
-export let store = createStore(rootReducer)
+export const store = legacy_createStore(rootReducer)
 
 //export type RootStoreType = typeof store
 export type ReduxRootStoreType = ReturnType<typeof rootReducer>

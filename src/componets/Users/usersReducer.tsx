@@ -2,6 +2,8 @@
 const FOLLOW = 'FOLLOW'
 const UN_FOLLOW = 'UN_FOLLOW'
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USER_COUNT = 'SET_TOTAL_USER_COUNT'
 
 
 
@@ -9,6 +11,8 @@ export type usersInitialStateTypeNew = {
     items: Array<UsersType>
     totalCount: number,
     error: string
+    pageSize: number
+    currentPage: number
 }
 
 export type UsersType = {
@@ -23,34 +27,13 @@ type photosType = {
     small: string,
     large: string
 }
-//export type usersInitialStateType =  typeof usersInitialState;
-// type locationType ={
-//     city:string,
-//     country:string
-// }
-//
-// export type usersType ={
-//     id:string,
-//     photoUrl:string,
-//     followStatus: boolean,
-//     fullName: string,
-//     status: string,
-//     location: locationType
-// }
-//
-// let usersInitialState = {
-//    users: [
-//        {id:v1(), photoUrl: "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png",followStatus: true, fullName: `Dmitry`, status: `free`, location: {city: `Minsk`, country: `Bel`}},
-//        {id:v1(), photoUrl: "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png",followStatus: true, fullName: `Julia`, status: `busy`, location: {city: `Hrodno`, country: `Bel`}},
-//        {id:v1(), photoUrl: "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png",followStatus: false, fullName: `Artem`, status: `work`, location: {city: `Moskwa`, country: `Rus`}},
-//        {id:v1(), photoUrl: "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png",followStatus: false, fullName: `Maks`, status: `student`, location: {city: `Kiev`, country: `Ukr`}},
-// ] as Array<usersType>
-// }
+
 let usersInitialState = {
     items: [],
     totalCount: 0,
-    error: ''
-
+    error: '',
+    pageSize: 4,
+    currentPage: 1
 }
 
 export const usersReducer = (state: usersInitialStateTypeNew = usersInitialState, action: ActionType) => {
@@ -66,14 +49,19 @@ export const usersReducer = (state: usersInitialStateTypeNew = usersInitialState
                 users: state.items.map(e => e.id === action.payload.userId ? {...e, followStatus: false} : e)
             }
         case SET_USERS :
-            return {...state, items: [...state.items, ...action.payload.users]}
+            return {...state, items: action.payload.users}
+        case SET_CURRENT_PAGE:
+            return {...state, currentPage : action.payload.currentPage}
+        case SET_TOTAL_USER_COUNT:
+            return {...state, totalCount : action.payload.totalUserCount}
 
         default:
             return state
     }
 }
 
-type ActionType = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
+type ActionType = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC> | ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setTotalUserCountAC>
+
 
 export const followAC = (id: number) => {
     return {
@@ -96,6 +84,23 @@ export const setUsersAC = (users: Array<UsersType>) => {
         type: SET_USERS,
         payload: {
             users: users
+        }
+    } as const
+}
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        payload: {
+            currentPage: currentPage
+        }
+    } as const
+}
+
+export const setTotalUserCountAC = (totalUserCount: number) => {
+    return {
+        type: SET_TOTAL_USER_COUNT,
+        payload: {
+            totalUserCount: totalUserCount
         }
     } as const
 }
