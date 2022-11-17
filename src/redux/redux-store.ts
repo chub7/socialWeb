@@ -9,8 +9,5 @@ let rootReducer = combineReducers({
     usersPage: usersReducer
 })
 
-
 export const store = legacy_createStore(rootReducer)
-
-//export type RootStoreType = typeof store
 export type ReduxRootStoreType = ReturnType<typeof rootReducer>

@@ -1,3 +1,4 @@
+import {log} from "util";
 
 const FOLLOW = 'FOLLOW'
 const UN_FOLLOW = 'UN_FOLLOW'
@@ -39,14 +40,15 @@ let usersInitialState = {
 export const usersReducer = (state: usersInitialStateTypeNew = usersInitialState, action: ActionType) => {
     switch (action.type) {
         case FOLLOW :
+            console.log(state.items)
             return {
                 ...state,
-                users: state.items.map(e => e.id === action.payload.userId ? {...e, followStatus: true} : e)
+                users: state.items.map(e => e.id === action.payload.userId ?  {...e, followed: true} : e)
             }
         case UN_FOLLOW :
             return {
                 ...state,
-                users: state.items.map(e => e.id === action.payload.userId ? {...e, followStatus: false} : e)
+                users: state.items.map(e => e.id === action.payload.userId ? {...e, followed: false} : e)
             }
         case SET_USERS :
             return {...state, items: action.payload.users}
@@ -60,7 +62,11 @@ export const usersReducer = (state: usersInitialStateTypeNew = usersInitialState
     }
 }
 
-type ActionType = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC> | ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setTotalUserCountAC>
+type ActionType = ReturnType<typeof followAC> |
+    ReturnType<typeof unFollowAC> |
+    ReturnType<typeof setUsersAC> |
+    ReturnType<typeof setCurrentPageAC> |
+    ReturnType<typeof setTotalUserCountAC>
 
 
 export const followAC = (id: number) => {
