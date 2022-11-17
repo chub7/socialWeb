@@ -15,7 +15,7 @@ import {Users} from "./users";
 import s from "./user.module.css";
 
 
-export class UsersAPIComponent extends React.Component<CommonType> {
+export class UsersAPIComponent extends React.Component<usersContainerConnectCommonType> {
 
     componentDidMount() {
         this.props.toggleFetching(true)
@@ -56,7 +56,7 @@ export class UsersAPIComponent extends React.Component<CommonType> {
 }
 
 
-export type mapStateToPropsType = {
+type mapStateToPropsType = {
     usersPageUsers: Array<UsersType>
     pageSize: number
     totalCount: number
@@ -64,7 +64,7 @@ export type mapStateToPropsType = {
     isFetching: boolean
 }
 
-export type mapDispatchToPropsType = {
+type mapDispatchToPropsType = {
     follow: (id: number) => void
     unFollow: (id: number) => void
     setUsers: (users: Array<UsersType>) => void
@@ -105,7 +105,7 @@ const mapStateToProps = (state: ReduxRootStoreType): mapStateToPropsType => {
 //     }
 // }
 
-export type CommonType = mapStateToPropsType & mapDispatchToPropsType
+export type usersContainerConnectCommonType = mapStateToPropsType & mapDispatchToPropsType
 
 export const UsersContainer = connect(mapStateToProps, {
     follow,

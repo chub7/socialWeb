@@ -72,7 +72,6 @@ type ActionType = ReturnType<typeof follow> |
     ReturnType<typeof setTotalUserCount> |
     ReturnType<typeof toggleFetching>
 
-
 export const follow = (id: number) => {
     return {
         type: FOLLOW,

@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./user.module.css";
 import userPhoto from "../../images/sbcf-default-avatar.png"
 import {UsersType} from "./usersReducer";
+import {NavLink} from "react-router-dom";
 
 type usersType = {
     pageSize: number
@@ -33,7 +34,9 @@ export const Users = (props: usersType) => {
             {props.usersPageUsers.map(e => <div key={e.id}>
             <span>
                 <div>
+                    <NavLink to={`/profile/${e.id}`}>
                     <img alt={'#'} className={s.userPhoto} src={e.photos.small === null ? userPhoto : e.photos.small}/>
+                    </NavLink>
                 </div>
                 <div>
                     {e.followed
