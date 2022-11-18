@@ -21,7 +21,7 @@ const App = () => {
                         <DialogsContainer/>
                     }/>
 
-                    <Route exact path={`/profile/*`} render={() =>
+                    <Route exact path={`/profile/:userId?`} render={() =>
                         <ProfileContainer/>
                     }/>
                     <Route exact path={`/users`} render={() =>

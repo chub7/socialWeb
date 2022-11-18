@@ -82,28 +82,6 @@ const mapStateToProps = (state: ReduxRootStoreType): mapStateToPropsType => {
         isFetching: state.usersPage.isFetching
     }
 }
-// const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-//     return {
-//         follow: (id: number) => {
-//             dispatch(follow(id))
-//         },
-//         unFollow: (id: number) => {
-//             dispatch(unFollow(id))
-//         },
-//         setUsers: (users: Array<UsersType>) => {
-//             dispatch(setUsers(users))
-//         },
-//         setCurrentPage: (currentPage :number) => {
-//             dispatch(setCurrentPage(currentPage))
-//         },
-//         setTotalUserCount: (totalUserCount) => {
-//             dispatch(setTotalUserCount(totalUserCount))
-//         },
-//         toggleFetching: (isFetching: boolean) => {
-//             dispatch(toggleFetching(isFetching))
-//         }
-//     }
-// }
 
 export type usersContainerConnectCommonType = mapStateToPropsType & mapDispatchToPropsType
 
