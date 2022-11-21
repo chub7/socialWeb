@@ -16,12 +16,14 @@ type mapStateToPropsType = {
 type mapDispatchToPropsType = {
     setUserProfile: (response: profileType) => void
 }
+
 type OwnPropsType = mapStateToPropsType & mapDispatchToPropsType
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 export class ProfileContainerAPI extends React.Component<PropsType> {
 
     componentDidMount() {
+
         let userId = this.props.match.params.userId
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(response => {
@@ -42,7 +44,6 @@ const mapStateToProps = (state: ReduxRootStoreType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile
     }
-
 }
 
 let withUrlDataContainerComponent = withRouter(ProfileContainerAPI)

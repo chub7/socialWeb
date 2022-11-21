@@ -6,23 +6,6 @@ import {connect} from "react-redux";
 import { Dispatch } from 'redux';
 
 
-// export const DialogsContainer = (props: DialogsType) => {
-//     let dialogsPageData = props.store.getState().dialogsPage
-//
-//     const onChangetextAreaHadnler = (newText: string) => {
-//         props.store.dispatch(changeNewMessageBodyAc(newText))
-//     }
-//     const onButtonClickHandler = () => {
-//         props.store.dispatch(sendNewMessageAc(props.store.getState().dialogsPage.newMessageBody))
-//     }
-//
-//     return (<Dialogs dialogsPageData={dialogsPageData}
-//                      onChangetextAreaHadnler={onChangetextAreaHadnler}
-//                      onButtonClickHandler={onButtonClickHandler}
-//         />
-//
-//     );
-// };
 
 type mapStateToPropsType = {
     dialogsPageData:dialogsPageInitialStateType
