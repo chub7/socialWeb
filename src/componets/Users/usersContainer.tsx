@@ -19,7 +19,7 @@ export class UsersAPIComponent extends React.Component<usersContainerConnectComm
 
     componentDidMount() {
         this.props.toggleFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{withCredentials: true})
             .then(response => {
                 this.props.toggleFetching(false)
                 this.props.setUsers(response.data.items)
@@ -30,7 +30,7 @@ export class UsersAPIComponent extends React.Component<usersContainerConnectComm
     onPageChanged = (pageNumber: number) => {
         this.props.toggleFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{withCredentials: true})
             .then(response => {
                 this.props.toggleFetching(false)
                 this.props.setUsers(response.data.items)

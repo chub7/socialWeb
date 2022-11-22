@@ -3,6 +3,7 @@ import s from "./user.module.css";
 import userPhoto from "../../images/sbcf-default-avatar.png"
 import {UsersType} from "./usersReducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type usersType = {
     pageSize: number
@@ -22,6 +23,31 @@ export const Users = (props: usersType) => {
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i)
     }
+
+    const aXunfollow = (id: number) => {
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
+            withCredentials: true,
+            headers: {"API-KEY": `2ab039b3-0657-432a-993c-8a114bc9f9d4`}
+        })
+            .then(response => {
+                if (response.data.rsultCode === 0)
+                    debugger
+                    props.unFollow(id)
+            })
+    }
+
+    const aXfollow = (id: number) => {
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
+            withCredentials: true,
+            headers: {"API-KEY": `2ab039b3-0657-432a-993c-8a114bc9f9d4`}
+        })
+            .then(response => {
+                if (response.data.rsultCode === 0)
+                    debugger
+                    props.follow(id)
+            })
+    }
+
     return (
         <div>
             <div>
@@ -40,8 +66,11 @@ export const Users = (props: usersType) => {
                 </div>
                 <div>
                     {e.followed
-                        ? <button onClick={() => props.unFollow(e.id)}>UnFollow</button>
-                        : <button onClick={() => props.follow(e.id)}>Follow</button>}
+                        ? <button onClick={() => aXunfollow(e.id)}>UnFollow</button>
+                        : <button onClick={() => aXfollow(e.id)}>Follow</button>}
+
+                        {/*? <button onClick={() => props.unFollow(e.id)}>UnFollow</button>*/}
+                        {/*: <button onClick={() => props.follow(e.id)}>Follow</button>}*/}
                 </div>
             </span>
                 <span>

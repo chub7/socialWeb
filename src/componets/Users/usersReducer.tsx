@@ -73,6 +73,7 @@ type ActionType = ReturnType<typeof follow> |
     ReturnType<typeof toggleFetching>
 
 export const follow = (id: number) => {
+    console.log(id)
     return {
         type: FOLLOW,
         payload: {
@@ -81,6 +82,7 @@ export const follow = (id: number) => {
     } as const
 }
 export const unFollow = (id: number) => {
+    console.log(id)
     return {
         type: UN_FOLLOW,
         payload: {
