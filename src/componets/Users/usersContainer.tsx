@@ -10,30 +10,31 @@ import {
     UsersType
 } from "./usersReducer";
 import React from "react";
-import axios from "axios";
+
 import {Users} from "./users";
 import s from "./user.module.css";
+import {getUsers} from "../../api";
 
 
 export class UsersAPIComponent extends React.Component<usersContainerConnectCommonType> {
 
     componentDidMount() {
         this.props.toggleFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{withCredentials: true})
+        getUsers(this.props.currentPage, this.props.pageSize)
             .then(response => {
                 this.props.toggleFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(response.items)
                 this.props.setTotalUserCount(50)
             })
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.toggleFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{withCredentials: true})
+        this.props.toggleFetching(true)
+        getUsers(pageNumber, this.props.pageSize)
             .then(response => {
                 this.props.toggleFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(response.items)
             })
     }
 
