@@ -30,8 +30,8 @@ export const Users = (props: usersType) => {
             headers: {"API-KEY": `2ab039b3-0657-432a-993c-8a114bc9f9d4`}
         })
             .then(response => {
-                if (response.data.rsultCode === 0)
-                    debugger
+                if (response.data.resultCode === 0)
+
                     props.unFollow(id)
             })
     }
@@ -42,8 +42,8 @@ export const Users = (props: usersType) => {
             headers: {"API-KEY": `2ab039b3-0657-432a-993c-8a114bc9f9d4`}
         })
             .then(response => {
-                if (response.data.rsultCode === 0)
-                    debugger
+                if (response.data.resultCode === 0)
+
                     props.follow(id)
             })
     }
