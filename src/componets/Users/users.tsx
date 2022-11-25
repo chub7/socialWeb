@@ -14,6 +14,8 @@ type usersType = {
     follow: (id: number) => void
     setCurrentPage: (id: number) => void
     totalCount: number
+    toggleFollowingProgress:(follow:boolean ,id:number)=>void
+    followingProgress: Array<number>
 }
 
 export const Users = (props: usersType) => {
@@ -25,26 +27,30 @@ export const Users = (props: usersType) => {
     }
 
     const aXunfollow = (id: number) => {
+        props.toggleFollowingProgress(true,id)
         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
             withCredentials: true,
             headers: {"API-KEY": `2ab039b3-0657-432a-993c-8a114bc9f9d4`}
         })
             .then(response => {
-                if (response.data.resultCode === 0)
-
+                if (response.data.resultCode === 0) {
                     props.unFollow(id)
+                }
+                props.toggleFollowingProgress(false,id)
             })
     }
 
     const aXfollow = (id: number) => {
+        props.toggleFollowingProgress(true,id)
         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
             withCredentials: true,
             headers: {"API-KEY": `2ab039b3-0657-432a-993c-8a114bc9f9d4`}
         })
             .then(response => {
-                if (response.data.resultCode === 0)
-
+                if (response.data.resultCode === 0) {
                     props.follow(id)
+                }
+                props.toggleFollowingProgress(false,id)
             })
     }
 
@@ -66,8 +72,8 @@ export const Users = (props: usersType) => {
                 </div>
                 <div>
                     {e.followed
-                        ? <button onClick={() => aXunfollow(e.id)}>UnFollow</button>
-                        : <button onClick={() => aXfollow(e.id)}>Follow</button>}
+                        ? <button disabled={props.followingProgress.some(id => id ===e.id)} onClick={() => aXunfollow(e.id)}>UnFollow</button>
+                        : <button disabled={props.followingProgress.some(id => id ===e.id)} onClick={() => aXfollow(e.id)}>Follow</button>}
 
                         {/*? <button onClick={() => props.unFollow(e.id)}>UnFollow</button>*/}
                         {/*: <button onClick={() => props.follow(e.id)}>Follow</button>}*/}
