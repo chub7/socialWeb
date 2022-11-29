@@ -9,6 +9,7 @@ import { Dispatch } from 'redux';
 
 type mapStateToPropsType = {
     dialogsPageData:dialogsPageInitialStateType
+    isAuth:boolean
 }
 
 type mapDispatchToPropsType = {
@@ -18,7 +19,8 @@ type mapDispatchToPropsType = {
 
 const mapStateToProps =(state:ReduxRootStoreType):mapStateToPropsType=>{
     return {
-        dialogsPageData: state.dialogsPage
+        dialogsPageData: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 

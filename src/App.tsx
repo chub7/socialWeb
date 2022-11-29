@@ -6,6 +6,7 @@ import {DialogsContainer} from "./componets/Dialogs/DialogsContainer";
 import {UsersContainer} from "./componets/Users/usersContainer";
 import {ProfileContainer} from "./componets/Profile/ProfileConainer";
 import {HeaderContainer} from "./componets/Header/HeaderContainer";
+import {Login} from "./componets/Login/Login";
 
 
 const App = () => {
@@ -25,6 +26,9 @@ const App = () => {
                     }/>
                     <Route exact path={`/users`} render={() =>
                         <UsersContainer/>
+                    }/>
+                    <Route exact path={`/login`} render={() =>
+                        <Login/>
                     }/>
 
                 </div>
