@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {AppThunkType} from "./redux-store";
+import {usersAPI} from "../api";
 
 const ADD_POST = 'ADD-POST'
 const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT'
@@ -66,6 +68,16 @@ export const setUserProfile = (profile: profileType) => {
         }
     } as const
 }
+// thunk
+export const getUserProfile = (userId: string): AppThunkType => {
+    return (dispatch) => {
+        usersAPI.getProfile(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data))
+            })
+    }
+}
+
 
 export type profileType = {
     userId: number
@@ -75,12 +87,10 @@ export type profileType = {
     contacts: contactsType
     photos: photosType
 }
-
 type photosType = {
     small: string | null
     large: string | null
 }
-
 type contactsType = {
     github: string
     vk: string
