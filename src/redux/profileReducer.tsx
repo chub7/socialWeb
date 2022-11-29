@@ -26,7 +26,7 @@ let profilePageInitialState = {
 
 //export type profilePageInitialStateType = typeof profilePageInitialState
 
-export const profileReducer = (state: profilePageInitialStateType = profilePageInitialState, action: ActionTypes): profilePageInitialStateType => {
+export const profileReducer = (state: profilePageInitialStateType = profilePageInitialState, action: ProfileReducerActionTypes): profilePageInitialStateType => {
     switch (action.type) {
         case ADD_POST:
             return {
@@ -44,7 +44,7 @@ export const profileReducer = (state: profilePageInitialStateType = profilePageI
     }
 }
 
-type ActionTypes = ReturnType<typeof addPostAc> | ReturnType<typeof changeNewTextAc> | ReturnType<typeof setUserProfile>
+export type ProfileReducerActionTypes = ReturnType<typeof addPostAc> | ReturnType<typeof changeNewTextAc> | ReturnType<typeof setUserProfile>
 
 export const addPostAc = (postText: string) => {
     return {

@@ -34,7 +34,7 @@ let dialogsPageIntialState = {
 
 export type dialogsPageInitialStateType = typeof dialogsPageIntialState
 
-export const dialogsReducer = (state: dialogsPageInitialStateType = dialogsPageIntialState, action: ActionTypes): dialogsPageInitialStateType => {
+export const dialogsReducer = (state: dialogsPageInitialStateType = dialogsPageIntialState, action: DialogsReducerActionsTypes): dialogsPageInitialStateType => {
     switch (action.type) {
         case CHANGHE_NEW_MESSAGE_BODY:
             return {...state, newMessageBody: action.newText};
@@ -50,7 +50,7 @@ export const dialogsReducer = (state: dialogsPageInitialStateType = dialogsPageI
 
 }
 
-type ActionTypes = ReturnType<typeof changeNewMessageBodyAc> | ReturnType<typeof sendNewMessageAc>
+export type DialogsReducerActionsTypes = ReturnType<typeof changeNewMessageBodyAc> | ReturnType<typeof sendNewMessageAc>
 
 export const changeNewMessageBodyAc = (newText: string) => {
     return {

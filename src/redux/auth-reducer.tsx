@@ -17,7 +17,7 @@ export type  dataType<T = null>= {
 }
 
 
-export const authReducer = (state = authInitialState, action: ActionType): dataType => {
+export const authReducer = (state = authInitialState, action: AuthReducerActionsType): dataType => {
     switch (action.type) {
         case SET_USER_DATA:
         return {
@@ -28,7 +28,7 @@ export const authReducer = (state = authInitialState, action: ActionType): dataT
     }
 }
 
-type ActionType = ReturnType<typeof setUserDataAC>
+export type AuthReducerActionsType = ReturnType<typeof setUserDataAC>
 
 export const setUserDataAC = (   id: number | null,
                                  email: string | null,
