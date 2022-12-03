@@ -3,7 +3,7 @@ import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {dialogsPageInitialStateType} from "../../redux/dialogsReducer";
-import {Redirect} from "react-router-dom";
+
 
 
 
@@ -28,7 +28,7 @@ export const Dialogs = (props: DialogsType) => {
         props.onButtonClickHandler(props.dialogsPageData.newMessageBody)
     }
 
-    if(!props.isAuth) return <Redirect to={`/login`} />
+
 
     return (
         <div>
