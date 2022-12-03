@@ -1,6 +1,7 @@
 import {AppThunkType} from "./redux-store";
 import {authApi} from "../api";
 
+
 const SET_USER_DATA = `SET_USER_DATA `
 
 let authInitialState: dataType = {
@@ -51,6 +52,7 @@ export const getAuthUserData = (): AppThunkType => {
                 if (response.data.resultCode === 0) {
                     let {id, login, email} = response.data.data
                     dispatch(setUserDataAC(id, email, login))
+                    //dispatch(setProfileStatus(true))
                 }
             })
     }
