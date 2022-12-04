@@ -106,7 +106,6 @@ export const updateStatus = (status: string): AppThunkType => {
         profileAPI.updateStatus(status)
             .then(response => {
                 if (response.data.resultCode  === 0 ) {
-                    debugger
                     dispatch(setStatus(status))
                 }
             })

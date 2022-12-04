@@ -4,19 +4,12 @@ import {Profile} from "./Profile";
 import {ReduxRootStoreType} from "../../redux/redux-store";
 import {getStatus, getUserProfile, profileType, updateStatus} from "../../redux/profileReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-
 import {compose} from "redux";
-
 
 type PathParamsType = {
     userId: string
 }
 
-type mapStateToPropsType = {
-    profile: profileType | null
-    isAuth: boolean
-    status: string
-}
 type mapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
     getStatus: (userId: string) => void
@@ -35,7 +28,7 @@ export class ProfileContainerAPI extends React.Component<PropsType> {
             userId=`26505`
         }
         this.props.getUserProfile(userId)
-        this.props.getStatus(userId)
+     this.props.getStatus(userId)
 
     }
 
@@ -48,8 +41,11 @@ export class ProfileContainerAPI extends React.Component<PropsType> {
     }
 
 }
-
-
+type mapStateToPropsType = {
+    profile: profileType | null
+    isAuth: boolean
+    status: string
+}
 
 const mapStateToProps = (state: ReduxRootStoreType): mapStateToPropsType => {
     return {

@@ -1,58 +1,9 @@
-import React, {ChangeEvent} from 'react'
+import React from 'react'
 import s from "./ProfileInfo.module.css";
 import {profileType} from "../../../redux/profileReducer";
+import {PreLoader} from "../PreLoader";
+import {ProfileStatus} from "../ProfileStatus";
 
-type PropsType = {
-    status:string
-    updateStatus: (status: string) => void
-}
-class ProfileStatus extends React.Component <PropsType>{
-
-    state = {
-        editMode: false,
-        status: this.props.status
-    }
-
-    activateEditMode = () => {
-        this.setState({
-            editMode: !this.state.editMode
-        })
-
-    }
-    deactivateEditMode = () => {
-        this.setState({
-            editMode: false
-        })
-        this.props.updateStatus(this.state.status)
-
-    }
-
-    onStatusChange =(e:ChangeEvent<HTMLInputElement>)=> {
-        this.setState({
-            status: e.currentTarget.value
-        })
-    }
-
-    render() {
-
-
-        return <>
-            {!this.state.editMode
-                ?
-                <div>
-                    <span onDoubleClick={this.activateEditMode}>{this.props.status || `Empty status`}</span>
-                </div>
-                :
-                <div>
-                    <input value={this.state.status} autoFocus onChange={this.onStatusChange} onBlur={this.deactivateEditMode}   onDoubleClick={this.activateEditMode}/>
-                </div>
-            }
-
-        </>
-
-
-    }
-}
 
 type ProfileInfoType = {
     profile: profileType | null
@@ -63,7 +14,7 @@ type ProfileInfoType = {
 export const ProfileInfo = (props: ProfileInfoType) => {
 
     if (!props.profile) {
-        return <div className={props.profile ? s.loader : ``}></div>
+        return <PreLoader/>
     }
 
     return (
