@@ -1,16 +1,13 @@
 import {v1} from "uuid";
 import {AppThunkType} from "./redux-store";
-import {usersAPI} from "../api";
+import {profileAPI, usersAPI} from "../api";
 
 const ADD_POST = 'ADD-POST'
 const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
-const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
+const SET_STATUS = 'SET_STATUS'
 
-export type ProfileStatusType = {
-    status: boolean,
-    editable: boolean
-}
+
 export type postsDataType = {
     id: string
     message: string
@@ -20,7 +17,7 @@ type profilePageInitialStateType = {
     message:string,
     postsData :Array<postsDataType>
     profile: profileType | null
-    profileStatus: ProfileStatusType
+    status: string
 }
 let profilePageInitialState = {
     message: ``,
@@ -29,10 +26,8 @@ let profilePageInitialState = {
         {id: v1(), message: "It's my first post", likesCount: 23},
     ] as Array<postsDataType>,
     profile: null,
-    profileStatus: {
-        status: false,
-        editable: false
-    }
+    status: ``,
+
 };
 
 //export type profilePageInitialStateType = typeof profilePageInitialState
@@ -50,8 +45,8 @@ export const profileReducer = (state: profilePageInitialStateType = profilePageI
             return {...state, message: action.newText};
             case SET_USER_PROFILE:
             return {...state, profile: action.payload.profile};
-        // case SET_PROFILE_STATUS:
-        //     return {...state,profileStatus:{...state.profileStatus,status:action.status} }
+            case SET_STATUS:
+            return {...state, status: action.status }
         default:
             return state;
     }
@@ -60,7 +55,7 @@ export const profileReducer = (state: profilePageInitialStateType = profilePageI
 export type ProfileReducerActionTypes = ReturnType<typeof addPostAc>
     | ReturnType<typeof changeNewTextAc>
     | ReturnType<typeof setUserProfile>
-    //| ReturnType<typeof setProfileStatus>
+    | ReturnType<typeof setStatus>
 
 export const addPostAc = (postText: string) => {
     return {
@@ -83,18 +78,37 @@ export const setUserProfile = (profile: profileType) => {
     } as const
 }
 
-// export const setProfileStatus = (status: boolean) => {
-//     return {
-//         type: SET_PROFILE_STATUS,
-//         status
-//     } as const
-// }
+export const setStatus = (status: string) => {
+    return {
+        type: SET_STATUS,
+        status
+    } as const
+}
 // thunk
 export const getUserProfile = (userId: string): AppThunkType => {
     return (dispatch) => {
         usersAPI.getProfile(userId)
             .then(response => {
                 dispatch(setUserProfile(response.data))
+            })
+    }
+}
+export const getStatus = (userId: string): AppThunkType => {
+    return (dispatch) => {
+        profileAPI.getStatus(userId)
+            .then(response => {
+                dispatch(setStatus(response.data))
+            })
+    }
+}
+export const updateStatus = (status: string): AppThunkType => {
+    return (dispatch) => {
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if (response.data.resultCode  === 0 ) {
+                    debugger
+                    dispatch(setStatus(status))
+                }
             })
     }
 }
