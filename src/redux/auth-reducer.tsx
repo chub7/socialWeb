@@ -21,7 +21,7 @@ export const authReducer = (state = authInitialState, action: AuthReducerActions
     switch (action.type) {
         case SET_USER_DATA:
             return {
-                ...state,...action.payload,isAuth:true
+                ...state,...action.payload, isAuth: action.payload.isAuth
             }
         default:
             return state
@@ -32,13 +32,15 @@ export type AuthReducerActionsType = ReturnType<typeof setUserDataAC>
 
 export const setUserDataAC = (id: number | null,
                               email: string | null,
-                              login: string | null,) => {
+                              login: string | null,
+                              isAuth: boolean) => {
     return {
         type: SET_USER_DATA,
         payload: {
             id,
             email,
-            login
+            login,
+            isAuth
         }
     } as const
 }
@@ -51,9 +53,26 @@ export const getAuthUserData = (): AppThunkType => {
             .then(response => {
                 if (response.data.resultCode === 0) {
                     let {id, login, email} = response.data.data
-                    dispatch(setUserDataAC(id, email, login))
-                    //dispatch(setProfileStatus(true))
+                    dispatch(setUserDataAC(id, email, login, true))
                 }
+            })
+    }
+}
+export const login = (email:string, password: string, rememberMe:boolean): AppThunkType => {
+    return (dispatch) => {
+        authApi.logIn(email, password, rememberMe)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(getAuthUserData())
+                }
+            })
+    }
+}
+export const logOut = (): AppThunkType => {
+    return (dispatch) => {
+        authApi.logOut()
+            .then(response => {
+                dispatch(setUserDataAC(null, null, null, false))
             })
     }
 }

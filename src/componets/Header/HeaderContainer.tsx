@@ -2,7 +2,7 @@ import React from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {ReduxRootStoreType} from "../../redux/redux-store";
-import {getAuthUserData, dataType} from "../../redux/auth-reducer";
+import {getAuthUserData, dataType, logOut} from "../../redux/auth-reducer";
 
 
 export class HeaderContainerAPI extends React.Component<OwnPropsType> {
@@ -13,7 +13,7 @@ export class HeaderContainerAPI extends React.Component<OwnPropsType> {
 
     render() {
         return (
-            <Header auth={this.props.auth}/>
+            <Header auth={this.props.auth} logOut={this.props.logOut}/>
         )
     }
 }
@@ -23,6 +23,7 @@ type mapStateToPropsType = {
 }
 type mapDispatchToPropsType = {
     authThunk: () => void
+    logOut:() => void
 }
 
 type OwnPropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -33,4 +34,4 @@ return{
 }
 }
 
-export const HeaderContainer = connect(mapStateToProps, {authThunk: getAuthUserData})(HeaderContainerAPI)
+export const HeaderContainer = connect(mapStateToProps, {authThunk: getAuthUserData, logOut})(HeaderContainerAPI)
