@@ -1,8 +1,11 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from "./MyPosts.module.css";
 import {Post} from "./Post/MyPost";
 import {postsDataType} from "../../../redux/profileReducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {Textarea} from "../../common/FormControls/FormsControls";
+
 
 type profilePageTypeSpecial = {
     message: string
@@ -10,6 +13,7 @@ type profilePageTypeSpecial = {
     postsData: Array<postsDataType>
 
 }
+const maxLength10 = maxLengthCreator(10)
 
 export const MyPosts = (props: profilePageTypeSpecial) => {
 
@@ -38,7 +42,7 @@ export const AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormReduxType>
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name={"postMessage"} component={"textarea"}/>
+                <Field name={"postMessage"} component={Textarea} validate={[required, maxLength10]}/>
             </div>
             <div>
                 <button>Add post</button>
