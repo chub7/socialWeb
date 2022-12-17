@@ -1,6 +1,6 @@
 import {v1} from "uuid";
-import {addPostAc, changeNewTextAc} from "./profileReducer";
-import {changeNewMessageBodyAc,  sendNewMessageAc} from "./dialogsReducer";
+import {addPostAc} from "./profileReducer";
+import { sendNewMessageAc} from "./dialogsReducer";
 
 // bellow перенесено в profileReducer
 type postsDataType = {
@@ -44,10 +44,8 @@ type StoreType = {
     dispatch: (action: ActionTypes) => void
 
 }
-type ActionTypes = ReturnType<typeof addPostAc> | ReturnType<typeof changeNewTextAc>
-    | ReturnType<typeof changeNewMessageBodyAc> | ReturnType<typeof sendNewMessageAc>
-
-
+type ActionTypes = ReturnType<typeof addPostAc>
+    | ReturnType<typeof sendNewMessageAc>
 
 
 const store: StoreType = {

@@ -1,34 +1,25 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {dialogsPageInitialStateType} from "../../redux/dialogsReducer";
-
+import {AddMessage} from "./AddMessageForm";
 
 
 
 type DialogsType = {
     dialogsPageData: dialogsPageInitialStateType
-    onChangetextAreaHadnler:(newText:string)=>void
-    onButtonClickHandler:(newMessageBody: string)=>void
-    isAuth:boolean
+    onChangetextAreaHadnler: (newText: string) => void
+    onButtonClickHandler: (newMessageBody: string) => void
+    isAuth: boolean
 
 }
 
 export const Dialogs = (props: DialogsType) => {
 
-    let messagesElemets = props.dialogsPageData.messageData.map(e => <Message key={e.id} message={e.message} id={e.id}/>)
+    let messagesElemets = props.dialogsPageData.messageData.map(e => <Message key={e.id} message={e.message}
+                                                                              id={e.id}/>)
     let dialogsElemets = props.dialogsPageData.dialogsData.map(e => <DialogItem key={e.id} name={e.name} id={e.id}/>)
-
-    const onChangetextAreaHadnler = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        let newText = e.currentTarget.value
-        props.onChangetextAreaHadnler(newText)
-    }
-    const onButtonClickHandler = () => {
-        props.onButtonClickHandler(props.dialogsPageData.newMessageBody)
-    }
-
-
 
     return (
         <div>
@@ -39,8 +30,7 @@ export const Dialogs = (props: DialogsType) => {
                 <div className={s.messages}>
                     {messagesElemets}
                 </div>
-                <textarea value={props.dialogsPageData.newMessageBody} onChange={onChangetextAreaHadnler} ></textarea>
-                <button onClick={onButtonClickHandler}>Add post</button>
+                <AddMessage onSumbit={props.onButtonClickHandler}/>
             </div>
 
         </div>

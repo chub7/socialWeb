@@ -1,5 +1,5 @@
 import React from 'react';
-import {changeNewMessageBodyAc, dialogsPageInitialStateType, sendNewMessageAc} from "../../redux/dialogsReducer";
+import {dialogsPageInitialStateType, sendNewMessageAc} from "../../redux/dialogsReducer";
 import {ReduxRootStoreType} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
@@ -14,7 +14,6 @@ type mapStateToPropsType = {
 }
 
 type mapDispatchToPropsType = {
-    onChangetextAreaHadnler:(newText:string)=>void,
     onButtonClickHandler:(newMessageBody: string)=>void
 }
 
@@ -28,9 +27,6 @@ const mapStateToProps =(state:ReduxRootStoreType):mapStateToPropsType=>{
 
 const mapDispatchToProps =(dispatch: Dispatch):mapDispatchToPropsType=>{
     return{
-        onChangetextAreaHadnler: (newText: string) => {
-            dispatch(changeNewMessageBodyAc(newText))
-        },
         onButtonClickHandler: (newMessageBody: string) => {
             dispatch(sendNewMessageAc(newMessageBody))
         }
@@ -38,8 +34,6 @@ const mapDispatchToProps =(dispatch: Dispatch):mapDispatchToPropsType=>{
     }
 }
 
-
-//export const DialogsContainer = WithAuthRedirect(connect(mapStateToProps,mapDispatchToProps)(Dialogs));
 export const DialogsContainer =
     compose<React.ComponentType>(
         connect(mapStateToProps, mapDispatchToProps),

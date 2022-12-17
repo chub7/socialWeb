@@ -1,4 +1,4 @@
-import {addPostAc, changeNewTextAc, postsDataType} from "../../../redux/profileReducer";
+import {addPostAc, postsDataType} from "../../../redux/profileReducer";
 import {MyPosts} from "./MyPosts";
 import {ReduxRootStoreType} from "../../../redux/redux-store";
 import {connect} from "react-redux";
@@ -10,8 +10,6 @@ type mapStateToPropsType = {
 }
 type mapDispatchToProps = {
     onButtonClickHandler:(message: string)=>void,
-    onChangeTextAreaHandler:(newtext: string)=>void
-
 }
 const mapStateToProps = (state: ReduxRootStoreType) : mapStateToPropsType => {
     return {
@@ -24,9 +22,6 @@ const mapDispatchToProps = (dispatch: Dispatch) : mapDispatchToProps => {
     return {
         onButtonClickHandler: (message: string) => {
             dispatch(addPostAc(message))
-        },
-        onChangeTextAreaHandler: (newtext: string) => {
-            dispatch(changeNewTextAc(newtext))
         }
     }
 }
