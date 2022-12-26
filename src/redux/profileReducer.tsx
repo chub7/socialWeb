@@ -46,7 +46,7 @@ export const profileReducer = (state: profilePageInitialStateType = profilePageI
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
         case SET_STATUS:
-            return {...state, status: action.status}
+                        return {...state, status: action.status}
         default:
             return state;
     }
@@ -74,10 +74,13 @@ export const getStatus = (userId: string): AppThunkType => {
     }
 }
 export const updateStatus = (status: string): AppThunkType => {
+
     return (dispatch) => {
         profileAPI.updateStatus(status)
             .then(response => {
+
                 if (response.data.resultCode  === 0 ) {
+
                     dispatch(setStatus(status))
                 }
             })
