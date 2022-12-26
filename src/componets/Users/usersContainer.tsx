@@ -9,6 +9,14 @@ import {
 import React from "react";
 import {Users} from "./users";
 import s from "./user.module.css";
+import {
+    getCurrentPage,
+    getFollowingProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalCount,
+    getUsers
+} from "../../redux/users-selector";
 
 
 
@@ -60,12 +68,12 @@ type mapDispatchToPropsType = {
 
 const mapStateToProps = (state: ReduxRootStoreType): mapStateToPropsType => {
     return {
-        usersPageUsers: state.usersPage.items,
-        pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingProgress: state.usersPage.followingProgress
+        usersPageUsers: getUsers(state),
+        pageSize: getPageSize(state),
+        totalCount: getTotalCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingProgress: getFollowingProgress(state),
     }
 }
 

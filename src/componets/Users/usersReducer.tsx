@@ -148,6 +148,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number): AppThunkType => {
     return (dispatch) => {
         dispatch(toggleFetching(true))
+        dispatch(setCurrentPage(currentPage))
         usersAPI.getUsers(currentPage, pageSize)
             .then(response => {
                 dispatch(toggleFetching(false))
