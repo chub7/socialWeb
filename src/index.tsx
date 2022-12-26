@@ -1,24 +1,18 @@
 import React from 'react';
 import './index.css';
 import ReactDOM from "react-dom";
-import App from "./App";
 import {store} from "./redux/redux-store";
 import {Provider} from "react-redux";
+import {App} from "./App";
+import {BrowserRouter} from "react-router-dom";
 
 
-//export const renderTree = () => {
 ReactDOM.render(
     <Provider store={store}>
-        <App
-            //store={store}
-            //message={store.getState().profilePage.message}
-        />
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
     </Provider>,
     document.getElementById('root')
 );
-//}
-
-//renderTree()
-
-//store.subscribe(()=>renderTree);
 

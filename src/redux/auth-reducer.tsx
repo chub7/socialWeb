@@ -48,9 +48,9 @@ export const setUserDataAC = (id: number | null,
 
 // thunk
 
-export const getAuthUserData = (): AppThunkType => {
-    return (dispatch) => {
-        authApi.authMe()
+export const getAuthUserData = (): AppThunkType =>
+    (dispatch) => {
+       return authApi.authMe()
             .then(response => {
                 if (response.data.resultCode === 0) {
                     let {id, login, email} = response.data.data
@@ -58,7 +58,7 @@ export const getAuthUserData = (): AppThunkType => {
                 }
             })
     }
-}
+
 export const login = (email:string, password: string, rememberMe:boolean):AppThunkType => {
     return (dispatch) => {
         authApi.logIn(email, password, rememberMe)

@@ -25,9 +25,10 @@ export class ProfileContainerAPI extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if(!userId){
-            //userId=`26505`
             userId = this.props.authorizedUserID ? this.props.authorizedUserID.toString() : ``
-            console.log(userId)
+            if(!userId){
+                this.props.history.push("/login")
+            }
         }
         this.props.getUserProfile(userId)
      this.props.getStatus(userId)
@@ -35,7 +36,6 @@ export class ProfileContainerAPI extends React.Component<PropsType> {
     }
 
     render() {
-
         return (<div>
             <Profile profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}
             />
@@ -60,11 +60,7 @@ const mapStateToProps = (state: ReduxRootStoreType): mapStateToPropsType => {
     }
 }
 
-
-
-
 export const ProfileContainer =  compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
-    withRouter,
-    //WithAuthRedirect
-)(ProfileContainerAPI)
+    withRouter)
+    (ProfileContainerAPI)
