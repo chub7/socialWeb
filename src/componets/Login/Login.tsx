@@ -14,9 +14,7 @@ type FormDataType = {
     rememberMe: boolean
 }
 
-const maxLength10 = maxLengthCreator(10)
-
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ( props) => {
 
 
     return (

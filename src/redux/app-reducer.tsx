@@ -13,7 +13,6 @@ type AppInitialStateType = typeof appInitialState
 export const appReducer = (state = appInitialState, action: AppReducerActionsType): AppInitialStateType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
-            debugger
             return {...state, initialized: true}
         default:
             return state

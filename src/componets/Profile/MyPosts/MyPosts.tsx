@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import s from "./MyPosts.module.css";
 import {Post} from "./Post/MyPost";
 import {postsDataType} from "../../../redux/profileReducer";
@@ -15,7 +15,7 @@ type profilePageTypeSpecial = {
 }
 const maxLength10 = maxLengthCreator(10)
 
-export const MyPosts = (props: profilePageTypeSpecial) => {
+export const MyPosts = memo((props: profilePageTypeSpecial) => {
 
     let postElements =
         props.postsData
@@ -36,7 +36,7 @@ export const MyPosts = (props: profilePageTypeSpecial) => {
         </div>
 
     )
-}
+})
 
 export const AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormReduxType>> = (props) => {
     return (
